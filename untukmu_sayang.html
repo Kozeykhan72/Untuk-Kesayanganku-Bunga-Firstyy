@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Bunga Firsty ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0d0509;color:#fff;overflow-x:hidden;
+}
+body:before{
+    content:"";position:fixed;width:550px;height:550px;left:-220px;top:-220px;
+    background:#ff3d6e;filter:blur(180px);opacity:.13;pointer-events:none;z-index:-2
+}
+body:after{
+    content:"";position:fixed;width:550px;height:550px;right:-250px;bottom:-250px;
+    background:#ff8fa8;filter:blur(180px);opacity:.10;pointer-events:none;z-index:-2
+}
+
+/* Loading */
+#loading{
+    position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    background:radial-gradient(circle at center,#571426,#18070e 60%,#080307);
+    transition:opacity 1.2s ease
+}
+.loading-heart{font-size:65px;animation:heartbeat 1.4s infinite}
+#loading p{margin-top:20px;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.55}
+
+/* Hearts */
+.hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:5}
+.heart{position:absolute;bottom:-60px;opacity:0;animation:floatingHeart linear forwards}
+
+/* Music */
+.music-button{
+    position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);background:rgba(20,5,11,.88);
+    backdrop-filter:blur(15px);color:white;cursor:pointer;font-size:20px;z-index:1000;
+    box-shadow:0 10px 35px rgba(0,0,0,.5);transition:.4s
+}
+.music-button:hover{transform:scale(1.08)}
+.music-button.playing{animation:heartbeat 1.2s infinite}
+
+/* Music status */
+.music-status{
+    position:fixed;right:22px;bottom:88px;z-index:1000;
+    padding:8px 13px;border-radius:20px;font-size:10px;letter-spacing:1px;
+    background:rgba(20,5,11,.85);border:1px solid rgba(255,255,255,.12);
+    opacity:0;transform:translateY(8px);transition:.35s;pointer-events:none
+}
+.music-status.show{opacity:1;transform:translateY(0)}
+
+/* Hero */
+.hero{
+    min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;
+    padding:30px;background:radial-gradient(circle at center,#641a32 0%,#260a16 42%,#0d0509 100%);
+    position:relative;overflow:hidden
+}
+.hero:before{
+    content:"";position:absolute;width:700px;height:700px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.035);animation:rotateGlow 35s linear infinite
+}
+.hero-content{position:relative;z-index:2;max-width:850px}
+.hero-small{font-size:11px;text-transform:uppercase;letter-spacing:6px;opacity:.6}
+.hero h1{
+    font-family:'Cormorant Garamond',serif;font-size:clamp(75px,14vw,150px);
+    line-height:.78;margin:28px 0;
+    background:linear-gradient(90deg,#fff,#ffc0d0,#fff);
+    -webkit-background-clip:text;color:transparent
+}
+.hero-description{font-size:14px;line-height:1.9;opacity:.65}
+.main-button{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:32px;
+    padding:15px 30px;border-radius:50px;border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.07);color:white;text-decoration:none;font-family:inherit;
+    cursor:pointer;backdrop-filter:blur(15px);transition:.4s
+}
+.main-button:hover{transform:translateY(-5px);background:rgba(255,255,255,.14);box-shadow:0 15px 40px rgba(0,0,0,.25)}
+
+section{padding:110px 20px;position:relative}
+.container{width:min(900px,100%);margin:auto}
+.section-heading{text-align:center;margin-bottom:60px}
+.section-heading span{display:block;font-size:10px;letter-spacing:5px;text-transform:uppercase;opacity:.45;margin-bottom:12px}
+.section-heading h2{font-family:'Cormorant Garamond',serif;font-size:clamp(45px,8vw,75px);line-height:1}
+
+/* Letter */
+.letter{
+    padding:55px;border-radius:35px;background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);
+    box-shadow:0 40px 100px rgba(0,0,0,.3)
+}
+.letter-icon{text-align:center;font-size:38px;margin-bottom:35px}
+.letter p{font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.85;color:#f9e9ed;margin-bottom:20px}
+.letter strong,.future strong,.not-perfect strong{color:#ffc0d0}
+.signature{text-align:right;margin-top:45px;font-family:'Cormorant Garamond',serif;font-size:31px;color:#ffc0d0}
+
+/* Highlight boxes */
+.memory-box,.not-perfect,.future{
+    max-width:800px;margin:auto;padding:65px 40px;border-radius:35px;
+    border:1px solid rgba(255,255,255,.1);text-align:center
+}
+.memory-box{background:radial-gradient(circle at center,rgba(130,35,65,.4),rgba(255,255,255,.025))}
+.not-perfect{background:linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.02))}
+.future{background:radial-gradient(circle at center,rgba(112,28,56,.45),rgba(255,255,255,.025))}
+.moon,.not-perfect-icon,.future-icon{font-size:48px;margin-bottom:25px}
+.memory-box p,.not-perfect p,.future p{font-family:'Cormorant Garamond',serif;font-size:25px;line-height:1.9;color:#f9e9ed}
+
+/* Cards */
+.little-things{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.little-card{
+    padding:30px;border-radius:25px;background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.1);transition:.4s
+}
+.little-card:hover{transform:translateY(-7px);background:rgba(255,255,255,.075)}
+.little-icon{font-size:28px;margin-bottom:15px}
+.little-card h3{font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:8px;color:#ffc1d1}
+.little-card p{font-size:13px;line-height:1.8;opacity:.6}
+
+/* Quote */
+.quote{text-align:center;max-width:800px;margin:auto;padding:40px 20px}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:90px;color:#c76d83;line-height:.5;margin-bottom:25px}
+.quote p{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,44px);line-height:1.45;color:#f4e7ea}
+.quote small{display:block;margin-top:30px;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.45}
+
+/* Final */
+.final-section{text-align:center;padding-bottom:130px}
+.final-text{max-width:700px;margin:auto}
+.final-text p{font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.9;opacity:.8}
+footer{text-align:center;padding:100px 20px 60px;background:#080306}
+.footer-heart{font-size:48px;animation:heartbeat 1.5s infinite}
+footer h2{font-family:'Cormorant Garamond',serif;font-size:55px;margin:20px 0}
+footer p{font-size:12px;opacity:.45}
+.footer-signature{margin-top:40px;font-family:'Cormorant Garamond',serif;font-size:30px;color:#ffc0d0}
+
+/* Modal */
+.modal{
+    position:fixed;inset:0;background:rgba(5,2,4,.88);backdrop-filter:blur(18px);
+    display:none;justify-content:center;align-items:center;padding:20px;z-index:9999
+}
+.modal.show{display:flex}
+.modal-content{
+    width:min(650px,100%);padding:55px 35px;text-align:center;border-radius:35px;
+    background:linear-gradient(135deg,#481122,#19070e);
+    border:1px solid rgba(255,255,255,.15);box-shadow:0 40px 100px rgba(0,0,0,.6);
+    max-height:90vh;overflow:auto
+}
+.modal-heart{font-size:60px;animation:heartbeat 1.3s infinite}
+.modal-content h2{font-family:'Cormorant Garamond',serif;font-size:50px;margin:20px 0}
+.modal-content p{font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.9;color:#f8e9ed}
+.modal-content strong{color:#ffc0d0}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(45px);transition:opacity 1s ease,transform 1s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes floatingHeart{
+    0%{transform:translateY(0) rotate(0deg);opacity:0}
+    15%{opacity:.55}
+    100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+@keyframes rotateGlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+@media(max-width:700px){
+    section{padding:80px 18px}
+    .hero h1{font-size:70px}
+    .letter{padding:32px 23px}
+    .letter p{font-size:21px}
+    .memory-box,.not-perfect,.future{padding:45px 25px}
+    .memory-box p,.not-perfect p,.future p{font-size:21px}
+    .little-things{grid-template-columns:1fr}
+    footer h2{font-size:42px}
+    .music-status{right:18px;bottom:88px}
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+    <div class="loading-heart">❤️</div>
+    <p>Untuk seseorang yang istimewa...</p>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<!--
+    PENTING:
+    File musik harus bernama persis:
+    musikmp3.mp3
+
+    Letakkan musikmp3.mp3 satu folder dengan index.html.
+-->
+<audio id="music" loop preload="auto">
+    <source src="./musikmp3.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicStatus" class="music-status">Musik dimatikan</div>
+
+<button class="music-button" id="musicButton" title="Putar musik" aria-label="Putar musik">
+    🎵
+</button>
+
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="hero-small">Sebuah pesan dari hati</div>
+
+        <h1>
+            Bunga<br>
+            Firsty
+        </h1>
+
+        <p class="hero-description">
+            Untuk seseorang yang membuat hidupku terasa lebih indah.
+            <br>
+            Aku tidak tahu bagaimana cara mengatakan semuanya dengan sempurna.
+            <br>
+            Jadi kali ini, biarkan halaman ini yang mengatakannya.
+        </p>
+
+        <a href="#surat" class="main-button">
+            💌 Buka Surat Untukmu
+        </a>
+
+    </div>
+</section>
+
+
+<!-- SURAT -->
+<section id="surat">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Dari hatiku</span>
+            <h2>Sebuah Surat Untukmu</h2>
+        </div>
+
+        <div class="letter reveal">
+
+            <div class="letter-icon">💌</div>
+
+            <p>Bunga,</p>
+
+            <p>
+                Terima kasih karena sudah hadir dalam hidupku.
+                Mungkin aku tidak selalu pandai menunjukkan apa yang aku rasakan.
+                Kadang kata-kata yang seharusnya sederhana justru sulit keluar.
+            </p>
+
+            <p>
+                Tapi kalau ada satu hal yang ingin aku pastikan kamu tahu,
+                itu adalah betapa aku menghargai keberadaanmu.
+            </p>
+
+            <p>
+                Aku bersyukur pernah bertemu denganmu.
+                Bersyukur pernah mengenalmu lebih dekat.
+                Dan lebih dari itu, aku bersyukur karena sampai hari ini
+                kamu masih menjadi bagian dari hidupku.
+            </p>
+
+            <p>
+                Terima kasih untuk perhatian-perhatian kecilmu.
+                Untuk waktu yang kamu berikan.
+                Untuk kesabaranmu.
+                Untuk semua hal yang mungkin menurutmu biasa,
+                tetapi sebenarnya berarti banyak untukku.
+            </p>
+
+            <p>
+                Aku tahu kita tidak selalu sempurna.
+                Aku juga tahu hubungan bukan tentang hari-hari yang selalu indah.
+            </p>
+
+            <p>
+                Tapi aku ingin terus belajar.
+                Belajar memahami kamu.
+                Belajar menjaga perasaanmu.
+                Dan belajar menjadi seseorang yang pantas untuk tetap berada di sampingmu.
+            </p>
+
+            <p>
+                Terima kasih sudah memilih untuk tetap ada.
+            </p>
+
+            <p>
+                Dan kalau suatu hari nanti aku ditanya apa yang paling aku syukuri,
+                mungkin salah satu jawabannya adalah:
+                <br><br>
+                <strong>aku pernah menemukan Bunga.</strong>
+            </p>
+
+            <div class="signature">— Jaelani ❤️</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- KALAU SUATU HARI -->
+<section>
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Simpan baik-baik</span>
+            <h2>Kalau Suatu Hari Kamu Lupa...</h2>
+        </div>
+
+        <div class="memory-box reveal">
+
+            <div class="moon">🌙</div>
+
+            <p>
+                Kalau suatu hari kamu lupa betapa berartinya kamu bagiku,
+                ingatlah bahwa pernah ada seseorang yang merasa sangat beruntung
+                hanya karena bisa memanggil namamu.
+                <br><br>
+                Kalau suatu hari kamu merasa tidak cukup baik,
+                ingatlah bahwa di mataku, kamu tetap seseorang yang sangat berharga.
+                <br><br>
+                Kalau suatu hari kamu merasa sendirian,
+                ingatlah bahwa ada seseorang yang selalu berharap kamu baik-baik saja.
+                <br><br>
+                Dan kalau suatu hari kamu bertanya apakah aku masih mencintaimu,
+                jawabannya tetap:
+                <br><br>
+                <strong>Iya.</strong>
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- HAL KECIL -->
+<section>
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Yang mungkin sederhana</span>
+            <h2>Hal-Hal Kecil yang Aku Suka Darimu</h2>
+        </div>
+
+        <div class="little-things">
+
+            <div class="little-card reveal">
+                <div class="little-icon">😊</div>
+                <h3>Senyummu</h3>
+                <p>Ada sesuatu dari senyummu yang bisa membuat suasana terasa jauh lebih baik.</p>
+            </div>
+
+            <div class="little-card reveal">
+                <div class="little-icon">💬</div>
+                <h3>Cara Kamu Bercerita</h3>
+                <p>Bahkan cerita sederhana terasa menarik ketika datang darimu.</p>
+            </div>
+
+            <div class="little-card reveal">
+                <div class="little-icon">🤍</div>
+                <h3>Caramu Peduli</h3>
+                <p>Hal-hal kecil yang kamu lakukan sering kali berarti lebih besar daripada yang kamu sadari.</p>
+            </div>
+
+            <div class="little-card reveal">
+                <div class="little-icon">🌷</div>
+                <h3>Dirimu yang Apa Adanya</h3>
+                <p>Aku tidak membutuhkan versi lain dari dirimu. Aku suka kamu sebagai dirimu sendiri.</p>
+            </div>
+
+            <div class="little-card reveal">
+                <div class="little-icon">🥰</div>
+                <h3>Perhatianmu</h3>
+                <p>Ada rasa hangat ketika tahu ada seseorang yang benar-benar peduli.</p>
+            </div>
+
+            <div class="little-card reveal">
+                <div class="little-icon">❤️</div>
+                <h3>Kehadiranmu</h3>
+                <p>Sesederhana kamu ada, itu sudah cukup membuat hari terasa lebih berarti.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- TIDAK SEMPURNA -->
+<section>
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Tentang kita</span>
+            <h2>Aku Tidak Mencari yang Sempurna</h2>
+        </div>
+
+        <div class="not-perfect reveal">
+
+            <div class="not-perfect-icon">🤍</div>
+
+            <p>
+                Aku tidak mencintaimu karena semuanya selalu berjalan dengan mudah.
+                <br><br>
+                Aku mencintaimu karena bahkan ketika keadaan tidak mudah,
+                masih ada alasan untuk memilih satu sama lain.
+                <br><br>
+                Kita punya kekurangan.
+                Kita punya kesalahan.
+                Kita punya hari-hari yang mungkin tidak akan kita ingat sebagai hari terbaik.
+                <br><br>
+                Tapi cinta bukan tentang menemukan seseorang yang tidak pernah salah.
+                <br><br>
+                Cinta adalah tentang menemukan seseorang yang tetap ingin kita perjuangkan
+                setelah kita melihat sisi-sisi yang tidak sempurna.
+                <br><br>
+                Dan aku ingin terus memperjuangkan kita.
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- KUTIPAN -->
+<section>
+    <div class="container">
+
+        <div class="quote reveal">
+            <div class="quote-mark">“</div>
+
+            <p>
+                Aku tidak membutuhkan cerita yang sempurna.
+                Aku hanya ingin cerita yang masih memiliki kita di dalamnya.
+            </p>
+
+            <small>untuk Bunga</small>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- HARAPAN -->
+<section>
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Tentang hari esok</span>
+            <h2>Harapanku Tentang Kita</h2>
+        </div>
+
+        <div class="future reveal">
+
+            <div class="future-icon">♾️</div>
+
+            <p>
+                Aku tidak tahu seperti apa kehidupan kita nanti.
+                <br><br>
+                Tapi aku berharap ketika kita melihat kembali perjalanan yang sudah kita lalui,
+                kita bisa tersenyum dan berkata:
+                <br><br>
+                <strong>"Ternyata kita berhasil melewati semuanya."</strong>
+                <br><br>
+                Aku ingin melihat lebih banyak hari bersamamu.
+                Lebih banyak tawa.
+                Lebih banyak cerita.
+                Lebih banyak momen sederhana yang akhirnya menjadi kenangan indah.
+                <br><br>
+                Aku ingin terus belajar memahami kamu.
+                Terus belajar menjaga kamu.
+                Dan terus belajar menjadi seseorang yang pantas berjalan di sampingmu.
+                <br><br>
+                Aku tidak tahu bagaimana cerita kita akan berjalan.
+                <br><br>
+                Tapi selama masih ada kita di dalamnya,
+                <br>
+                <strong>aku ingin terus melangkah.</strong>
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- PESAN TERAKHIR -->
+<section class="final-section">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <span>Satu hal terakhir</span>
+            <h2>Ada Pesan Lagi Untukmu</h2>
+        </div>
+
+        <div class="final-text reveal">
+
+            <p>
+                Mungkin halaman ini tidak akan pernah benar-benar bisa menjelaskan
+                seberapa berarti kamu bagiku.
+                <br><br>
+                Tapi aku berharap setiap kali kamu melihat halaman ini,
+                kamu akan selalu ingat bahwa ada seseorang yang sangat bersyukur
+                pernah menemukanmu.
+            </p>
+
+            <button class="main-button" onclick="openMessage()">
+                💗 Buka Pesan Terakhir
+            </button>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-heart">❤️</div>
+
+    <h2>Untuk Bunga Firsty</h2>
+
+    <p>Terima kasih sudah hadir dalam hidupku.</p>
+
+    <p style="margin-top:15px;">
+        Semoga cerita kita tidak berhenti di halaman ini.
+    </p>
+
+    <div class="footer-signature">
+        Forever With You ❤️
+        <br>
+        — Jaelani
+    </div>
+
+</footer>
+
+
+<!-- MODAL -->
+<div class="modal" id="messageModal">
+
+    <div class="modal-content">
+
+        <div class="modal-heart">❤️</div>
+
+        <h2>Untuk Bunga</h2>
+
+        <p>
+            Kalau nanti ada hari di mana kamu merasa lelah,
+            istirahatlah.
+            <br><br>
+            Kalau nanti ada hari di mana kamu merasa sedih,
+            jangan merasa harus menghadapi semuanya sendirian.
+            <br><br>
+            Dan kalau nanti ada hari di mana kamu merasa tidak dicintai,
+            buka kembali halaman ini.
+            <br><br>
+            Karena di sini ada satu hal yang tidak berubah:
+            <br><br>
+            <strong>Aku mencintaimu.</strong>
+            <br><br>
+            Bukan karena kamu sempurna.
+            Bukan karena semuanya selalu mudah.
+            Tapi karena kamu adalah Bunga Firsty.
+            <br><br>
+            Dan aku bersyukur kamu pernah hadir dalam hidupku.
+        </p>
+
+        <button class="main-button" onclick="closeMessage()">
+            ❤️ Tutup Pesan
+        </button>
+
+    </div>
+</div>
+
+
+<script>
+/* Loading */
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        const loading = document.getElementById("loading");
+        loading.style.opacity = "0";
+        setTimeout(() => loading.style.display = "none", 1200);
+    }, 1400);
+});
+
+
+/* =====================================================
+   MUSIK NETLIFY
+   ===================================================== */
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+const musicStatus = document.getElementById("musicStatus");
+
+let isPlaying = false;
+
+function showMusicStatus(text) {
+    musicStatus.textContent = text;
+    musicStatus.classList.add("show");
+
+    clearTimeout(window.musicStatusTimer);
+
+    window.musicStatusTimer = setTimeout(() => {
+        musicStatus.classList.remove("show");
+    }, 2200);
+}
+
+async function playMusic() {
+    try {
+        await music.play();
+
+        isPlaying = true;
+        musicButton.textContent = "🔊";
+        musicButton.classList.add("playing");
+        musicButton.title = "Matikan musik";
+
+        showMusicStatus("Musik sedang diputar 🎵");
+
+    } catch (error) {
+        console.error("Gagal memutar musik:", error);
+
+        isPlaying = false;
+        musicButton.textContent = "🎵";
+        musicButton.classList.remove("playing");
+
+        showMusicStatus("Tekan tombol 🎵 untuk memutar");
+    }
+}
+
+function pauseMusic() {
+    music.pause();
+
+    isPlaying = false;
+    musicButton.textContent = "🎵";
+    musicButton.classList.remove("playing");
+    musicButton.title = "Putar musik";
+
+    showMusicStatus("Musik dimatikan");
+}
+
+musicButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    if (isPlaying) {
+        pauseMusic();
+    } else {
+        playMusic();
+    }
+});
+
+
+/*
+   Browser memblokir autoplay.
+   Setelah pengguna pertama kali menyentuh halaman,
+   kita mencoba menjalankan musik.
+*/
+let firstInteraction = true;
+
+document.addEventListener("pointerdown", () => {
+    if (firstInteraction && !isPlaying) {
+        firstInteraction = false;
+        playMusic();
+    }
+}, { once: true });
+
+
+/*
+   Kalau file MP3 tidak ditemukan,
+   tampilkan informasi di console.
+*/
+music.addEventListener("error", () => {
+    console.error(
+        "File musik tidak ditemukan. Pastikan musikmp3.mp3 berada satu folder dengan index.html."
+    );
+
+    showMusicStatus("File musik tidak ditemukan");
+});
+
+
+/* Scroll reveal */
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    },
+    { threshold: 0.12 }
+);
+
+document.querySelectorAll(".reveal").forEach((element) => {
+    observer.observe(element);
+});
+
+
+/* Floating hearts */
+const hearts = document.getElementById("hearts");
+
+function createHeart() {
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const symbols = ["♡", "♥", "❤", "♡"];
+
+    heart.textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        12 + Math.random() * 18 + "px";
+
+    heart.style.animationDuration =
+        7 + Math.random() * 7 + "s";
+
+    hearts.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 14000);
+}
+
+setInterval(createHeart, 1500);
+
+
+/* Modal */
+function openMessage() {
+    document
+        .getElementById("messageModal")
+        .classList.add("show");
+
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createHeart, i * 80);
+    }
+}
+
+function closeMessage() {
+    document
+        .getElementById("messageModal")
+        .classList.remove("show");
+}
+
+document
+    .getElementById("messageModal")
+    .addEventListener("click", (event) => {
+        if (event.target === event.currentTarget) {
+            closeMessage();
+        }
+    });
+</script>
+
+</body>
+</html>
